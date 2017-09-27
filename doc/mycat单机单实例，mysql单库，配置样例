@@ -1,0 +1,36 @@
+一、前提 ：
+  1、编译了mycat2，并解压了。（本说明解压到了：D:\soft\mycat2-8066）
+  2、准备了mysql，并且单库。并且权限全开
+    db名称为：test
+    帐号：root
+    密码：123456
+  3、JDK版本：1.8以及以上
+  4、本实例只介绍mycat单机单实例，mysql单库，的配置方式。
+ 二、修改文件：
+  1、conf/datasource.yml文件修改
+    repType值改为： SINGLE_NODE
+    去掉mysqls属性里的 第二个 -hostName以及子项
+    配置如下：
+    replicas:
+      - name: test
+        repType: SINGLE_NODE
+        switchType: DEFAULT_SWITCH
+        balanceType: BALANCE_ALL
+        mysqls:
+          - hostName: test
+            ip: 127.0.0.1
+            port: 3306
+            user: root
+            password: root
+            minCon: 1
+            maxCon: 10
+            maxRetryCount: 3
+  2、修改conf/wrapper.conf(机器内存大的可以不用修改，)
+    此文件不修改的情况，对于小内存机器，启动mycat时将会无法启动起来。
+    第一处：XX:MaxDirectMemorySize=256M
+    第二处：wrapper.java.additional.10=-Xmx512M
+    第三处：wrapper.java.additional.11=-Xms512M
+ 三、启动mycat
+    CMD方式进入mycat的安装bin目录，执行：mycat.bat console
+ 四、经过以上步骤，如果配置都对，即可通过客户端连接mycat
+    
