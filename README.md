@@ -78,7 +78,7 @@ Mycat 2.0 预览版。
 
 ### 1. 下载源码并编译
 
-1. clone源代码 git clone https://github.com/MyCATApache/tcp-proxy.git
+1. clone源代码 git clone https://github.com/MyCATApache/Mycat2.git
 
 2. maven编译 mvn clean install
 
